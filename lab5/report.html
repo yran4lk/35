@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Отчёт по лабораторной работе №5 — Изотов М.А.</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 15mm 20mm 20mm;
+    @bottom-center {
+      content: counter(page);
+      font-size: 10pt;
+      font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif;
+    }
+  }
+  @page:first {
+    @bottom-center { content: ""; }
+    margin: 20mm 15mm 20mm 20mm;
+  }
+
+  body {
+    font-family: "Liberation Sans", "DejaVu Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.45;
+    color: #111827;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Титульный лист */
+  .title-page {
+    height: 100%;
+    min-height: 250mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    page-break-after: always;
+    box-sizing: border-box;
+    padding-top: 5mm;
+    padding-bottom: 5mm;
+  }
+  .tp-header {
+    font-size: 10.5pt;
+    line-height: 1.35;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .tp-center {
+    margin-top: 35mm;
+    margin-bottom: 35mm;
+  }
+  .tp-title-main {
+    font-size: 18pt;
+    font-weight: 800;
+    margin-bottom: 6mm;
+    letter-spacing: 0.5px;
+  }
+  .tp-lab-num {
+    font-size: 13pt;
+    font-weight: bold;
+    margin-bottom: 5mm;
+  }
+  .tp-theme {
+    font-size: 12pt;
+    font-weight: normal;
+    font-style: italic;
+    line-height: 1.4;
+    max-width: 165mm;
+    margin: 0 auto;
+  }
+  .tp-discipline {
+    font-size: 11.5pt;
+    margin-top: 5mm;
+    font-weight: 600;
+  }
+  .tp-info-block {
+    display: flex;
+    justify-content: flex-end;
+    text-align: left;
+    margin-bottom: 25mm;
+  }
+  .tp-info-table {
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+  .tp-info-table td {
+    padding: 1px 4px;
+  }
+  .tp-footer {
+    font-size: 11pt;
+    font-weight: 600;
+  }
+
+  /* Заголовки */
+  h1 {
+    font-size: 13.5pt;
+    font-weight: bold;
+    margin-top: 18pt;
+    margin-bottom: 8pt;
+    color: #0f172a;
+    page-break-after: avoid;
+    text-transform: uppercase;
+    border-bottom: 1.5px solid #0f172a;
+    padding-bottom: 3px;
+  }
+  h2 {
+    font-size: 11.5pt;
+    font-weight: bold;
+    margin-top: 12pt;
+    margin-bottom: 6pt;
+    color: #1e3a8a;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 10.5pt;
+    font-weight: bold;
+    margin-top: 9pt;
+    margin-bottom: 5pt;
+    color: #1e40af;
+    page-break-after: avoid;
+  }
+
+  p {
+    text-align: justify;
+    margin-top: 0;
+    margin-bottom: 6pt;
+    text-indent: 1.25cm;
+  }
+  p.no-indent {
+    text-indent: 0;
+  }
+
+  ul, ol {
+    margin-top: 3pt;
+    margin-bottom: 6pt;
+    padding-left: 1.25cm;
+  }
+  li {
+    margin-bottom: 3pt;
+    text-align: justify;
+  }
+
+  /* Иллюстрации */
+  .figure-box {
+    margin: 9pt 0;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+  .figure-img {
+    max-width: 90%;
+    max-height: 82mm;
+    object-fit: contain;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+  }
+  .figure-caption {
+    font-size: 9.5pt;
+    font-style: italic;
+    color: #334155;
+    margin-top: 4pt;
+    text-align: center;
+  }
+
+  /* Код и листинги */
+  pre, code {
+    font-family: "Liberation Mono", "DejaVu Sans Mono", "Consolas", monospace;
+  }
+  pre {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 3.5px solid #2563eb;
+    border-radius: 4px;
+    padding: 7pt 10pt;
+    font-size: 9pt;
+    line-height: 1.35;
+    overflow-x: auto;
+    margin: 6pt 0 8pt 0;
+    page-break-inside: avoid;
+  }
+  p code, li code {
+    background: #f1f5f9;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 9pt;
+    color: #b91c1c;
+    border: 1px solid #e2e8f0;
+  }
+
+  /* Таблицы */
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8pt 0 10pt 0;
+    font-size: 9.5pt;
+    page-break-inside: avoid;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid #cbd5e1;
+    padding: 5pt 7pt;
+    text-align: left;
+  }
+  table.data-table th {
+    background: #f1f5f9;
+    font-weight: bold;
+    color: #0f172a;
+  }
+  table.data-table tr:nth-child(even) {
+    background: #f8fafc;
+  }
+
+  .note-box {
+    background: #eff6ff;
+    border-left: 3.5px solid #3b82f6;
+    padding: 6pt 10pt;
+    margin: 7pt 0;
+    font-size: 9.5pt;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+</style>
+</head>
+<body>
+
+<!-- ТИТУЛЬНЫЙ ЛИСТ -->
+<div class="title-page">
+  <div class="tp-header">
+    Автономная некоммерческая образовательная организация<br>
+    высшего образования Центросоюза Российской Федерации<br>
+    «Сибирский университет потребительской кооперации»<br>
+    (СибУПК)
+  </div>
+
+  <div class="tp-center">
+    <div class="tp-title-main">ОТЧЁТ</div>
+    <div class="tp-lab-num">по лабораторной работе №5</div>
+    <div class="tp-theme">
+      «Первичная настройка системы распределённого мониторинга Zabbix: развёртывание сервера мониторинга и пользовательского АРМ в среде Oracle VM VirtualBox, подключение Zabbix Agent и сбор телеметрии»
+    </div>
+    <div class="tp-discipline">
+      Дисциплина: «Инженерно-техническая поддержка информационных систем»
+    </div>
+  </div>
+
+  <div class="tp-info-block">
+    <table class="tp-info-table">
+      <tr>
+        <td><strong>Выполнил студент:</strong></td>
+        <td>Изотов Максим Александрович</td>
+      </tr>
+      <tr>
+        <td><strong>Специальность:</strong></td>
+        <td>09.02.07 «Информационные системы и программирование»</td>
+      </tr>
+      <tr>
+        <td><strong>Группа / Курс:</strong></td>
+        <td>ИСП-35, 4 курс</td>
+      </tr>
+      <tr>
+        <td><strong>Шифр студента:</strong></td>
+        <td>ISPO-01-23-038</td>
+      </tr>
+      <tr>
+        <td><strong>Проверил преподаватель:</strong></td>
+        <td>Тропин Даниил Александрович</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tp-footer">
+    г. Новосибирск, 2026 г.
+  </div>
+</div>
+
+<!-- 1. ВВЕДЕНИЕ -->
+<h1>1. Введение и цели лабораторной работы</h1>
+<p>
+  <strong>Цель работы:</strong> Практическое освоение развёртывания и первичной конфигурации промышленной системы распределённого мониторинга <strong>Zabbix 7.0 LTS</strong> в виртуальной среде гипервизора Oracle VM VirtualBox 7.x под управлением операционной системы Microsoft Windows 11. В рамках работы разворачивается двухузловая распределённая инфраструктура, включающая сервер мониторинга (Zabbix Server + СУБД MariaDB + веб-интерфейс Apache/PHP + Zabbix Agent) и клиентскую рабочую станцию (User Workstation / АРМ с установленным Zabbix Agent), настраивается взаимная сетевая доступность в режиме «Сетевой мост», выполняется сопряжение узлов через веб-интерфейс Zabbix и верифицируется непрерывный сбор телеметрии (Latest data).
+</p>
+<p>
+  В процессе реализации стенда в качестве методической основы использовались материалы обучающего цикла <strong>«Zabbix с нуля до короля»</strong> (канал AdminGuide), рекомендованного в лабораторном регламенте. Каждый этап инсталляции и настройки согласован с конкретными таймкодами соответствующих видеоуроков плейлиста.
+</p>
+
+<h2>Схема стенда виртуальной инфраструктуры</h2>
+<p class="no-indent">
+  В таблице 1 приведены итоговые параметры аппаратной конфигурации, операционных систем и сетевой адресации узлов тестового стенда.
+</p>
+
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>Параметр</th>
+      <th>Хостовая станция</th>
+      <th>ВМ 1: Zabbix Server</th>
+      <th>ВМ 2: User Workstation (АРМ)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Имя хоста / ВМ</strong></td>
+      <td><code>Windows-PC (yran4ik)</code></td>
+      <td><code>maksim-server</code></td>
+      <td><code>maksim-workstation</code></td>
+    </tr>
+    <tr>
+      <td><strong>Операционная система</strong></td>
+      <td>Microsoft Windows 11 Pro (x86_64)</td>
+      <td>Debian GNU/Linux 13 (Trixie) amd64</td>
+      <td>Debian GNU/Linux 13 (Trixie) amd64</td>
+    </tr>
+    <tr>
+      <td><strong>Гипервизор</strong></td>
+      <td>Oracle VM VirtualBox 7.x</td>
+      <td>Гостевая ВМ VirtualBox</td>
+      <td>Гостевая ВМ VirtualBox</td>
+    </tr>
+    <tr>
+      <td><strong>Режим сети</strong></td>
+      <td>Realtek Gaming 2.5GbE Controller</td>
+      <td>Bridged Adapter (Сетевой мост)</td>
+      <td>Bridged Adapter (Сетевой мост)</td>
+    </tr>
+    <tr>
+      <td><strong>MAC-адрес</strong></td>
+      <td>Физический адаптер хоста</td>
+      <td><code>08:00:27:08:bc:05</code></td>
+      <td><code>08:00:27:a7:e5:0f</code></td>
+    </tr>
+    <tr>
+      <td><strong>IPv4-адрес</strong></td>
+      <td><code>192.168.1.244/24</code></td>
+      <td><code>192.168.1.40/24</code></td>
+      <td><code>192.168.1.153/24</code></td>
+    </tr>
+    <tr>
+      <td><strong>Выделенные ресурсы</strong></td>
+      <td>Физический ПК (Windows 11)</td>
+      <td>2 vCPU / 2048 MB RAM / 20 GB VDI</td>
+      <td>2 vCPU / 2048 MB RAM / 20 GB VDI</td>
+    </tr>
+    <tr>
+      <td><strong>Установленные роли</strong></td>
+      <td>Управление стендом, веб-браузер</td>
+      <td>Zabbix Server, Frontend, MariaDB, Agent</td>
+      <td>Zabbix Agent (мониторируемый хост)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<!-- 2. РАЗДЕЛ 1 -->
+<h1>2. Раздел 1. Подготовка виртуальной инфраструктуры и верификация сети</h1>
+
+<h2>2.1. Конфигурация виртуальных машин в Oracle VM VirtualBox</h2>
+<p>
+  В среде гипервизора Oracle VM VirtualBox под Windows 11 зарегистрированы две специализированные виртуальные машины: <strong><code>maksim-server</code></strong> (сервер мониторинга) и <strong><code>maksim-workstation</code></strong> (пользовательский АРМ). Для обеспечения идентичности базового окружения клиентская ВМ <code>maksim-workstation</code> развёрнута путём клонирования стабильного снимка чистой системы Debian с обязательной перегенерацией уникального MAC-адреса виртуального сетевого контроллера Intel PRO/1000 MT Desktop (82540EM).
+</p>
+
+<div class="figure-box">
+  <img src="images/fig1_vbox_main.png" class="figure-img" alt="VirtualBox Менеджер">
+  <div class="figure-caption">Рисунок 1 — Главное окно Oracle VM VirtualBox Менеджер с зарегистрированными машинами maksim-server и maksim-workstation [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<h2>2.2. Сетевое профилирование в режиме «Сетевой мост» (Bridged Adapter)</h2>
+<p>
+  В соответствии с регламентом лабораторной работы сетевые адаптеры обеих машин переведены в режим <strong>«Сетевой мост» (Bridged Adapter)</strong> с привязкой к физическому сетевому интерфейсу хоста <code>Realtek Gaming 2.5GbE Family Controller</code>. Это позволило интегрировать каждую гостевую ОС непосредственно в широковещательный домен локальной физической сети <code>192.168.1.0/24</code> с автоматическим получением сетевых параметров по протоколу DHCP.
+</p>
+
+<div class="figure-box">
+  <img src="images/fig2_vbox_network_bridge.png" class="figure-img" alt="Сетевые параметры ВМ">
+  <div class="figure-caption">Рисунок 2 — Конфигурация сетевых адаптеров в режиме Bridged Interface на адаптере Realtek Gaming 2.5GbE с уникальными MAC-адресами [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<h2>2.3. Двусторонняя верификация сетевой связности по протоколу ICMP</h2>
+<p>
+  Для подтверждения готовности сетевого стека выполнена серия диагностических тестов сетевой связности между всеми тремя узлами инфраструктуры:
+</p>
+<ol>
+  <li><strong>Сервер &rarr; АРМ:</strong> в консоли сервера <code>maksim-server</code> (IP <code>192.168.1.40</code>) отправлены эхо-запросы ICMP на адрес АРМ (<code>192.168.1.153</code>). Передано 4 пакета, получено 4 пакета, <strong>0% потерь</strong>, среднее время задержки RTT = <strong>0.509 мс</strong>;</li>
+  <li><strong>АРМ &rarr; Сервер:</strong> в консоли АРМ <code>maksim-workstation</code> (IP <code>192.168.1.153</code>) выполнен встречный ping на адрес сервера (<code>192.168.1.40</code>). Зафиксирован 100% приём со средней задержкой RTT = <strong>0.529 мс</strong>;</li>
+  <li><strong>Хост &rarr; Обе ВМ:</strong> с командной строки Windows 11 (IP <code>192.168.1.244</code>) утилитой <code>ping</code> проверена доступность обоих адресов (<code>192.168.1.40</code> и <code>192.168.1.153</code>). Потери пакетов отсутствуют (0%), средние задержки &lt; 1 мс.</li>
+</ol>
+
+<div class="figure-box">
+  <img src="images/fig3_vm1_ip_ping.png" class="figure-img" alt="Ping с сервера на АРМ">
+  <div class="figure-caption">Рисунок 3 — Консольный вывод ip a на maksim-server (192.168.1.40) и встречный ping на maksim-workstation (192.168.1.153) [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<div class="figure-box">
+  <img src="images/fig4_vm2_ip_ping.png" class="figure-img" alt="Ping с АРМ на сервер">
+  <div class="figure-caption">Рисунок 4 — Консольный вывод ip a на maksim-workstation (192.168.1.153) и встречный ping на maksim-server (192.168.1.40) [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<div class="figure-box">
+  <img src="images/fig5_host_ping_both.png" class="figure-img" alt="Ping с хоста на обе ВМ">
+  <div class="figure-caption">Рисунок 5 — Верификация сетевой связности с командной строки Windows 11 (ipconfig и ping до обеих ВМ) [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- 3. РАЗДЕЛ 2 -->
+<h1>3. Раздел 2. Установка и настройка Zabbix Server и СУБД MariaDB</h1>
+<p>
+  Развёртывание сервера мониторинга выполнено на машине <strong><code>maksim-server</code></strong> строго по шагам видео-урока <em>«Zabbix с нуля до короля. Часть 1: Установка Zabbix»</em> (канал AdminGuide).
+</p>
+
+<h2>3.1. Подключение официального репозитория Zabbix 7.0 LTS [AdminGuide, 01:20 – 03:15]</h2>
+<p>
+  Стандартные пакеты Zabbix из репозиториев дистрибутива нередко содержат устаревшие версии. Согласно видео-инструкции, загружен и установлен пакет конфигурации официального репозитория разработчиков Zabbix SIA:
+</p>
+<pre>wget https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_7.0+debian13_all.deb
+dpkg -i zabbix-release_latest_7.0+debian13_all.deb
+apt update</pre>
+
+<h2>3.2. Установка СУБД MariaDB, серверных пакетов и зависимостей [AdminGuide, 03:40 – 05:10]</h2>
+<p>
+  Выполнена инсталляция полного серверного стека ПО одной командой управления пакетами:
+</p>
+<pre>apt install -y mariadb-server zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent</pre>
+
+<h2>3.3. Создание базы данных и настройка учётных прав [AdminGuide, 05:30 – 07:15]</h2>
+<p>
+  В реляционной СУБД MariaDB 11.8 инициализирована база данных <code>zabbix</code> с корректной кодировкой UTF-8 и правилами сопоставления символов. Создан локальный пользователь базы данных <code>zabbix</code> с паролем <code>zabbix_password</code>, выданы полные административные привилегии на схему:
+</p>
+<pre>CREATE DATABASE zabbix CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+CREATE USER 'zabbix'@'localhost' IDENTIFIED BY 'zabbix_password';
+GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'localhost';
+SET GLOBAL log_bin_trust_function_creators = 1;
+FLUSH PRIVILEGES;</pre>
+
+<h2>3.4. Импорт исходной схемы таблиц Zabbix [AdminGuide, 07:45 – 09:20]</h2>
+<p>
+  С помощью поставляемого пакетом <code>zabbix-sql-scripts</code> дампа произведено первичное заполнение структуры базы данных. В СУБД импортировано <strong>194 системные таблицы</strong>:
+</p>
+<pre>zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mariadb -uzabbix -pzabbix_password zabbix
+mariadb -e "SET GLOBAL log_bin_trust_function_creators = 0;"</pre>
+
+<div class="figure-box">
+  <img src="images/fig6_mariadb_setup.png" class="figure-img" alt="Инициализация MariaDB">
+  <div class="figure-caption">Рисунок 6 — Вывод команд MariaDB: успешное создание БД zabbix, импорт 194 таблиц и валидация схемы [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<h2>3.5. Конфигурирование Zabbix Server и запуск сервисов [AdminGuide, 09:40 – 11:30]</h2>
+<p>
+  В конфигурационном файле демона Zabbix Server (<code>/etc/zabbix/zabbix_server.conf</code>) раскомментирована и настроена директива пароля подключения к СУБД:
+</p>
+<pre>DBName=zabbix
+DBUser=zabbix
+DBPassword=zabbix_password</pre>
+<p>
+  Все ключевые службы переведены в состояние автозапуска и перезапущены через подсистему инициализации <code>systemd</code>:
+</p>
+<pre>systemctl restart zabbix-server zabbix-agent apache2 mariadb
+systemctl enable zabbix-server zabbix-agent apache2 mariadb</pre>
+
+<div class="figure-box">
+  <img src="images/fig7_zabbix_server_status.png" class="figure-img" alt="Статус Zabbix Server">
+  <div class="figure-caption">Рисунок 7 — Конфигурация zabbix_server.conf и подтверждение активного статуса служб в systemd [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<h2>3.6. Веб-интерфейс Zabbix Frontend и авторизация [AdminGuide, 11:50 – 14:10]</h2>
+<p>
+  Сформирован рабочий файл веб-конфигурации <code>/etc/zabbix/web/zabbix.conf.php</code>. Веб-сервер Apache2 успешно обслуживает фронтенд по адресу <code>http://192.168.1.40/zabbix</code>. При обращении отображается официальная страница входа Zabbix 7.0 LTS. Произведён вход под учётной записью администратора (логин <code>Admin</code>, пароль <code>zabbix</code>).
+</p>
+
+<div class="figure-box">
+  <img src="images/fig10_web_login.png" class="figure-img" alt="Страница входа Zabbix">
+  <div class="figure-caption">Рисунок 8 — Веб-страница авторизации Zabbix 7.0 LTS по адресу http://192.168.1.40/zabbix [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- 4. РАЗДЕЛ 3 -->
+<h1>4. Раздел 3. Установка и настройка Zabbix Agent на клиентском АРМ</h1>
+<p>
+  Наблюдаемым узлом сети выступает виртуальная машина <strong><code>maksim-workstation</code></strong> (IP <code>192.168.1.153</code>). Установка и настройка агента выполнены в точном соответствии с видео-уроком <em>«Zabbix с нуля до короля. Часть 2: Агенты и Хосты»</em> (AdminGuide).
+</p>
+
+<h2>4.1. Установка пакета Zabbix Agent [AdminGuide, 02:10 – 04:00]</h2>
+<p>
+  На клиентской машине инсталлирован пакет демона агента:
+</p>
+<pre>apt update && apt install -y zabbix-agent</pre>
+
+<h2>4.2. Конфигурирование zabbix_agentd.conf [AdminGuide, 04:20 – 07:15]</h2>
+<p>
+  В конфигурационном файле <code>/etc/zabbix/zabbix_agentd.conf</code> заданы критически важные параметры:
+</p>
+<ul>
+  <li><code>Server=192.168.1.40</code> — доверенный IP-адрес сервера Zabbix для пассивных проверок (сервер опрашивает агент по порту 10050);</li>
+  <li><code>ServerActive=192.168.1.40</code> — адрес сервера для отправки активных проверок и авторегистрации;</li>
+  <li><code>Hostname=maksim-workstation</code> — техническое сетевое имя хоста, <strong>строго идентичное</strong> имени, регистрируемому в веб-интерфейсе Zabbix.</li>
+</ul>
+
+<h2>4.3. Запуск демона и верификация сетевого сокета 10050 [AdminGuide, 07:30 – 08:45]</h2>
+<p>
+  Служба <code>zabbix-agent</code> запущена и добавлена в автозапуск. Утилитой <code>ss -tulpn</code> зафиксировано, что процесс <code>zabbix_agentd</code> корректно прослушивает TCP-порт <strong>10050</strong> на всех доступных интерфейсах (<code>0.0.0.0:10050</code>).
+</p>
+
+<div class="figure-box">
+  <img src="images/fig8_zabbix_agent_arm_status.png" class="figure-img" alt="Статус Zabbix Agent на АРМ">
+  <div class="figure-caption">Рисунок 9 — Конфигурация zabbix_agentd.conf на maksim-workstation, статус службы и прослушивание порта 10050 [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<h2>4.4. Проверка сбора метрик утилитой zabbix_get с сервера [AdminGuide, 09:00 – 11:20]</h2>
+<p>
+  Перед регистрацией в веб-интерфейсе качество сетевого взаимодействия проверено напрямую из командной строки Zabbix Server с помощью диагностической утилиты <code>zabbix_get</code>:
+</p>
+<pre>zabbix_get -s 127.0.0.1 -k system.uname
+zabbix_get -s 192.168.1.153 -k system.uname
+zabbix_get -s 192.168.1.153 -k "system.cpu.load[all,avg1]"
+zabbix_get -s 192.168.1.153 -k "vfs.fs.size[/,pfree]"</pre>
+<p>
+  Агент на <code>maksim-workstation</code> вернул ядро гостевой ОС (<code>Linux maksim-workstation 6.12.115+deb13.1-amd64</code>), текущую нагрузку ЦП и процент свободного дискового пространства, подтвердив полную готовность канала связи.
+</p>
+
+<div class="figure-box">
+  <img src="images/fig9_zabbix_get_telemetry.png" class="figure-img" alt="Тестирование zabbix_get">
+  <div class="figure-caption">Рисунок 10 — Запрос метрик телеметрии через zabbix_get с Zabbix Server к клиенту maksim-workstation [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- 5. РАЗДЕЛ 4 -->
+<h1>5. Раздел 4. Добавление хостов в веб-интерфейсе Zabbix и сбор данных</h1>
+
+<h2>5.1. Регистрация узлов сети и привязка шаблонов</h2>
+<p>
+  В веб-панели управления Zabbix в меню <strong>Data collection &rarr; Hosts</strong> сконфигурированы два узла сети:
+</p>
+<ol>
+  <li><strong>Сервер Zabbix (<code>maksim-server</code>):</strong> интерфейс Agent <code>127.0.0.1:10050</code>, группа <code>Linux servers</code>, шаблон <code>Linux by Zabbix agent</code>;</li>
+  <li><strong>Пользовательский АРМ (<code>maksim-workstation</code>):</strong> интерфейс Agent <code>192.168.1.153:10050</code>, группа <code>Linux servers</code>, шаблон <code>Linux by Zabbix agent</code>.</li>
+</ol>
+
+<div class="figure-box">
+  <img src="images/fig15_host_config_arm.png" class="figure-img" alt="Параметры узла АРМ">
+  <div class="figure-caption">Рисунок 11 — Карточка параметров узла сети User Workstation (maksim-workstation) в веб-интерфейсе Zabbix [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<h2>5.2. Верификация доступности хостов (зелёный индикатор ZBX)</h2>
+<p>
+  В списке узлов сети (<strong>Data collection &rarr; Hosts</strong>) индикаторы доступности <strong>ZBX</strong> для обоих узлов сети перешли в <strong>активный зелёный цвет</strong>. Это означает, что сервер Zabbix корректно опрашивает агентов на портах 10050.
+</p>
+
+<div class="figure-box">
+  <img src="images/fig11_hosts_both_green.png" class="figure-img" alt="Список узлов сети">
+  <div class="figure-caption">Рисунок 12 — Список узлов сети в веб-интерфейсе Zabbix: оба хоста активны с зелёным индикатором ZBX [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<h2>5.3. Анализ телеметрии в разделе «Latest data»</h2>
+<p>
+  В разделе <strong>Monitoring &rarr; Latest data</strong> проверено поступление оперативных метрик по обоим хостам:
+</p>
+<ul>
+  <li><strong>По Zabbix Server (хост <code>maksim-server</code>):</strong> собираются метрики <em>Load average</em>, <em>System uptime</em>, <em>Memory utilization</em>, сетевой трафик интерфейса <code>enp0s3</code>, внутренние счётчики очередей Zabbix Server;</li>
+  <li><strong>По User Workstation (хост <code>maksim-workstation</code>):</strong> считываются элементы данных (Items), включая загрузку ЦП, время непрерывной работы системы, свободную оперативную память, использование виртуального диска VDI и сетевую статистику.</li>
+</ul>
+
+<div class="figure-box">
+  <img src="images/fig12_latest_data_server.png" class="figure-img" alt="Последние данные сервера">
+  <div class="figure-caption">Рисунок 13 — Мониторинг последних данных (Latest data) для сервера мониторинга maksim-server [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<div class="figure-box">
+  <img src="images/fig13_latest_data_arm.png" class="figure-img" alt="Последние данные АРМ">
+  <div class="figure-caption">Рисунок 14 — Мониторинг последних данных (Latest data) для пользовательского АРМ maksim-workstation [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<h2>5.4. Главная панель мониторинга (Dashboard)</h2>
+<p>
+  На дашборде Zabbix отображается сводное состояние инфраструктуры: виджет <em>Host availability</em> фиксирует 2 доступных узла сети, виджеты проблем и триггеров сообщают об отсутствии сбоев, сервер Zabbix функционирует в штатном режиме.
+</p>
+
+<div class="figure-box">
+  <img src="images/fig14_dashboard_overview.png" class="figure-img" alt="Дашборд Zabbix">
+  <div class="figure-caption">Рисунок 15 — Главный дашборд Zabbix с виджетами доступности узлов сети и системной сводкой [Выполнил: Изотов М.А., гр. ИСП-35]</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- 6. РАЗДЕЛ 5 -->
+<h1>6. Раздел 5. Возникшие сложности/ошибки и способы их решения</h1>
+<p>
+  В процессе проектирования, развёртывания и конфигурирования программного комплекса возникли три характерные технические проблемы, успешно диагностированные и устранённые:
+</p>
+<ol>
+  <li>
+    <strong>Проблема отсутствия системной локали en_US.UTF-8 в окружении веб-сервера:</strong><br>
+    <em>Симптом:</em> На втором шаге мастера установки Zabbix веб-интерфейс заблокировал переход далее с ошибкой <code>Locale for language "en_US" is not found on the web server</code>.<br>
+    <em>Причина:</em> В минимальном базовом образе Debian GNU/Linux netinst утилита <code>locales</code> не сгенерировала стандартные интернациональные локали по умолчанию.<br>
+    <em>Решение:</em> В консоли сервера установлена утилита <code>locales</code>, раскомментированы строки <code>en_US.UTF-8 UTF-8</code> и <code>ru_RU.UTF-8 UTF-8</code> в файле <code>/etc/locale.gen</code>, выполнена генерация через <code>locale-gen</code> и перезапущен веб-сервер <code>systemctl restart apache2</code>, после чего проверка требований завершилась успешно.
+  </li>
+  <li>
+    <strong>Коллизия MAC-адресов и задержка аренды сетевого адреса по DHCP при клонировании ВМ:</strong><br>
+    <em>Симптом:</em> При первичном запуске клонированной ВМ <code>maksim-workstation</code> гостевая ОС не могла получить собственный IPv4-адрес от физического маршрутизатора.<br>
+    <em>Причина:</em> При создании копии машины без сброса MAC-адреса оба узла пытались отправлять DHCP Discover с одинаковым аппаратным идентификатором, что вызывало конфликт в таблице MAC-адресов коммутатора/точки доступа.<br>
+    <em>Решение:</em> Через команду гипервизора VirtualBox сгенерирован уникальный MAC-адрес (<code>08:00:27:A7:E5:0F</code>), в гостевой системе обновлено имя хоста в файлах <code>/etc/hostname</code> и <code>/etc/hosts</code>, перезапущена сетевая подсистема с вызовом <code>dhclient enp0s3</code>, в результате чего машина стабильно арендовала адрес <code>192.168.1.153/24</code>.
+  </li>
+  <li>
+    <strong>Требование привилегий доверенных функций СУБД при импорте схемы базы данных:</strong><br>
+    <em>Симптом:</em> При распаковке и заливке архива <code>server.sql.gz</code> СУБД MariaDB выдаёт предупреждение о невозможности создания хранимых процедур и триггеров без специальных привилегий.<br>
+    <em>Причина:</em> Включение бинарного логирования по умолчанию требует явного разрешения на создание недетерминированных функций в целях безопасности репликации.<br>
+    <em>Решение:</em> Перед импортом выполнен SQL-запрос <code>SET GLOBAL log_bin_trust_function_creators = 1;</code>, что позволило скрипту Zabbix корректно инициализировать все триггеры, после чего параметр был возвращён в безопасное значение <code>0</code>.
+  </li>
+</ol>
+
+<div class="page-break"></div>
+
+<!-- 7. ВЫВОДЫ -->
+<h1>7. Выводы</h1>
+<p>
+  В ходе выполнения лабораторной работы №5 были успешно и в полном объёме решены все поставленные практические задачи:
+</p>
+<ol>
+  <li><strong>Развёрнута виртуальная инфраструктура:</strong> В среде гипервизора Oracle VM VirtualBox под Windows 11 запущены две независимые виртуальные машины — сервер мониторинга <code>maksim-server</code> (2 vCPU, 2 ГБ RAM) и пользовательский АРМ <code>maksim-workstation</code> (2 vCPU, 2 ГБ RAM) на базе ОС Debian GNU/Linux 13 (Trixie). Обе машины сконфигурированы в режиме «Сетевой мост» (Bridged Adapter) на адаптере Realtek Gaming 2.5GbE и обладают прямой L2/L3 связностью с физическим хостом (192.168.1.244) со сверхнизкими задержками ICMP (~0.5 мс);</li>
+  <li><strong>Инсталлирован и запущен Zabbix Server 7.0 LTS:</strong> На базе рекомендаций практического курса AdminGuide выполнен полный цикл серверного развёртывания: подключен официальный репозиторий Zabbix, установлена СУБД MariaDB 11.8, создана база данных с импортом схемы из 194 таблиц, сконфигурирован веб-сервер Apache2 с модулем PHP, запущены и добавлены в автозапуск системные службы <code>zabbix-server</code>, <code>zabbix-agent</code>, <code>apache2</code>, <code>mariadb</code>;</li>
+  <li><strong>Сконфигурирован Zabbix Agent на клиентском АРМ:</strong> Наблюдаемый хост <code>maksim-workstation</code> настроен на передачу телеметрии серверу по порту 10050. Работоспособность сокета и доступность метрик предварительно верифицирована консольной утилитой <code>zabbix_get</code>;</li>
+  <li><strong>Осуществлена интеграция узлов в веб-панель мониторинга:</strong> В веб-интерфейсе Zabbix добавлены оба хоста с привязкой шаблона <code>Linux by Zabbix agent</code>. Подтверждён переход индикаторов доступности ZBX в <strong>зелёный статус</strong>. В разделе <em>Latest data</em> зафиксирован устойчивый поток поступающих метрик (ЦП, ОЗУ, накопители, сетевые интерфейсы, аптайм).</li>
+</ol>
+<p>
+  <strong>Практическая значимость:</strong> Полученные навыки развёртывания серверных компонентов Zabbix, сетевого профилирования агентов и решения системных конфликтов формируют базовый фундамент для дальнейших лабораторных работ по тонкой настройке триггеров, эскалации аварийных ситуаций, созданию дашбордов и автоматизации оповещений.
+</p>
+
+<!-- 8. ИСТОЧНИКИ -->
+<h1>8. Список использованных источников</h1>
+<ol>
+  <li>YouTube-плейлист обучающего курса: «Zabbix с нуля до короля» (канал AdminGuide) — URL: <code>https://www.youtube.com/playlist?list=PLdQohrQ3OmqS2wo9MwFKJtnXcVH5SCOh8</code>;</li>
+  <li>Официальная документация Zabbix 7.0 LTS. Архитектура и установка — URL: <code>https://www.zabbix.com/documentation/7.0/ru</code>;</li>
+  <li>Справочное руководство Debian GNU/Linux 13 (Trixie). Сетевая подсистема и пакетный менеджер APT — URL: <code>https://www.debian.org/doc/</code>;</li>
+  <li>Oracle VM VirtualBox 7.x User Manual. Сетевые режимы: Bridged Networking — URL: <code>https://www.virtualbox.org/manual/</code>.</li>
+</ol>
+
+</body>
+</html>
